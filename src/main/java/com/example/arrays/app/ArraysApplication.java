@@ -40,6 +40,5 @@ public class ArraysApplication {
 	// TODO
 	// docker
 	// largestPrimeNumberIsTheLargest
-	// push up to git
 
 }
