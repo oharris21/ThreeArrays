@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
@@ -23,11 +22,11 @@ class ArrayServiceTests {
 	@Autowired
 	private ArrayServiceImpl service;
 
-	static List<List<Integer>> arrays;
+	private static List<List<Integer>> arrays;
 
 	@BeforeAll
     static void generateArrays(@Autowired GeneratorServiceImpl generatorService, @Autowired ArrayDTO arrayDto) {
-		arrays = generatorService.generateAll(arrayDto).getAllArrays();
+		arrays = generatorService.generateAll();
 	}
 
 	@Test
@@ -52,16 +51,26 @@ class ArrayServiceTests {
 
 	@Test
 	void largestPrimeNumberIsPrime() {
-		int number = service.findLargestPrimeNumber(arrays);
-		boolean isPrime = ArrayServiceImpl.primeNumbersZeroToFifty.contains(number);
+		Integer number = service.findLargestPrimeNumber(List.of(43, 47, 48, 49, 50)).orElse(null);
+		boolean isPrime = ArrayServiceImpl.PRIME_NUMBERS_ZERO_TO_FIFTY.contains(number);
 
 		assertTrue(isPrime);
 	}
 
-//	@Test
-//	void largestPrimeNumberIsTheLargest() {
-//		int number = service.findLargestPrimeNumber(arrays);
-//
-//	}
+	@Test
+	void largestPrimeNumberIsCorrect() {
+		Integer number = service.findLargestPrimeNumber(List.of(43, 47, 48, 49, 50)).orElse(null);
+
+		assertEquals(47, number);
+	}
+
+	@Test
+	void primeNumbersThatAreNotTheLargestReturnFalse() {
+		Integer number = service.findLargestPrimeNumber(List.of(1, 2, 3, 4, 5)).orElse(null);
+
+        assertNotEquals(2, number);
+        assertNotEquals(3, number);
+        assertEquals(5, number);
+	}
 
 }

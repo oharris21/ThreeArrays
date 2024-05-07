@@ -5,5 +5,5 @@ import com.example.arrays.dto.ArrayDTO;
 import java.util.List;
 
 public interface GeneratorService {
-    ArrayDTO generateAll(ArrayDTO array);
+    List<List<Integer>> generateAll();
 }

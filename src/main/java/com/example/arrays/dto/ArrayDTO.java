@@ -14,11 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 @Component
 public class ArrayDTO {
-    private List<Integer> array1 = new ArrayList<>();
-    private List<Integer> array2 = new ArrayList<>();
-    private List<Integer> array3 = new ArrayList<>();
-
-    public List<List<Integer>> getAllArrays() {
-        return Arrays.asList(array1, array2, array3);
-    }
+    private List<Integer> array1;
+    private List<Integer> array2;
+    private List<Integer> array3;
+    private List<List<Integer>> allArrays;
+    private List<Integer> availableNumbers;
+    private Integer largestPrimeNumber;
 }

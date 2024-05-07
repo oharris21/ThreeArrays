@@ -27,18 +27,14 @@ public class ArraysApplication {
 		PrintService printService = appContext.getBean(PrintServiceImpl.class);
 
 		// business logic from requirements
-		List<List<Integer>> arrays = generatorService.generateAll(arrayDTO).getAllArrays();
-		List<Integer> availableNumbers = arrayService.extract(arrays);
-		Integer largestPrimeNumber = arrayService.findLargestPrimeNumber(arrays);
+		arrayDTO.setAllArrays(generatorService.generateAll());
+		arrayDTO.setAvailableNumbers(arrayService.extract(arrayDTO.getAllArrays()));
+		arrayDTO.setLargestPrimeNumber(arrayService.findLargestPrimeNumber(arrayDTO.getAvailableNumbers()).orElse(null));
 
 		// logic for printing to console
-		printService.printAllArrays(arrays);
-		printService.printAvailableNumbers(availableNumbers);
-		printService.printLargestPrimeNumber(largestPrimeNumber);
+		printService.printAllArrays(arrayDTO.getAllArrays());
+		printService.printAvailableNumbers(arrayDTO.getAvailableNumbers());
+		printService.printLargestPrimeNumber(arrayDTO.getLargestPrimeNumber());
 	}
-
-	// TODO
-	// docker
-	// largestPrimeNumberIsTheLargest
 
 }

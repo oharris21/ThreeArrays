@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @ComponentScan(basePackages = {"com.example.arrays"})
 class GeneratorServiceTests {
 
-    static List<List<Integer>> arrays;
+    private static List<List<Integer>> arrays;
 
     @BeforeAll
     static void generateArrays(@Autowired GeneratorServiceImpl generatorService, @Autowired ArrayDTO arrayDto) {
-        arrays = generatorService.generateAll(arrayDto).getAllArrays();
+        arrays = generatorService.generateAll();
     }
 
     @Test
@@ -30,7 +30,7 @@ class GeneratorServiceTests {
     }
 
     @Test
-    void generateAllSetsAllThreeArrays() {
+    void generateAllGeneratesThreeArrays() {
         assertEquals(3, arrays.size());
     }
 

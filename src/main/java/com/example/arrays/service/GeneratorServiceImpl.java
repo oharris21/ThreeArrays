@@ -13,11 +13,12 @@ public class GeneratorServiceImpl implements GeneratorService {
     public static final int RANGE = 50;
     public static final int SIZE = 15;
 
-    public ArrayDTO generateAll(ArrayDTO array) {
-        array.setArray1(IntStream.generate(() -> new Random().nextInt(RANGE)).limit(SIZE).boxed().toList());
-        array.setArray2(IntStream.generate(() -> new Random().nextInt(RANGE)).limit(SIZE).boxed().toList());
-        array.setArray3(IntStream.generate(() -> new Random().nextInt(RANGE)).limit(SIZE).boxed().toList());
-        return array;
+    public List<List<Integer>> generateAll() {
+        return List.of(
+                IntStream.generate(() -> new Random().nextInt(RANGE)).limit(SIZE).boxed().toList(),
+                IntStream.generate(() -> new Random().nextInt(RANGE)).limit(SIZE).boxed().toList(),
+                IntStream.generate(() -> new Random().nextInt(RANGE)).limit(SIZE).boxed().toList()
+        );
     }
 
 }
